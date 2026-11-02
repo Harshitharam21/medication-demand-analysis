@@ -411,7 +411,8 @@ st.sidebar.header("📂 Data Input")
 
 uploaded_file = st.sidebar.file_uploader(
     "Upload medication CSV",
-    type=["csv"]
+    type=["csv"],
+    key="medication_csv_uploader"
 )
 
 if uploaded_file is not None:
