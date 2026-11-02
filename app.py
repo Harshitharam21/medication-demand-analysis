@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+import plotly.express as px
 
 from scipy.stats import poisson
 
@@ -288,24 +288,21 @@ daily_demand = (
 )
 
 fig, ax = plt.subplots()
-
-ax.plot(
-    daily_demand["date"],
-    daily_demand["demand"],
-    marker="o",
-    markersize=3
+fig = px.line(
+    daily_demand,
+    x="date",
+    y="demand",
+    title="Medication Demand Over Time",
+    labels={"date": "Date", "demand": "Demand"},
 )
-
-ax.set_xlabel("Date")
-ax.set_ylabel("Demand")
-
-ax.set_title(
-    "Medication Demand Over Time"
+fig.update_traces(line_color="#1E88E5", line_width=2)
+fig.update_layout(
+    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="rgba(0,0,0,0)",
+    xaxis_gridcolor="#e0e0e0",
+    yaxis_gridcolor="#e0e0e0",
 )
-
-ax.grid(True, alpha=0.3)
-
-plt.xticks(rotation=45)
+st.plotly_chart(fig, use_container_width=True)
 
 st.pyplot(fig)
 
